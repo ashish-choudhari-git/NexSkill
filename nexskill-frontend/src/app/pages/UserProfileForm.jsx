@@ -45,7 +45,7 @@ const skillOptions = [
   "API Design", "REST APIs", "GraphQL", "SEO Optimization", "Performance Tuning", "Debugging", "Documentation Writing", "Technical Writing",
 ];
 
-const availabilityOptions = ["Weekdays", "Weekends", "Evenings", "Mornings"];
+const availabilityOptions = [ "Weekends", "Evenings", "Mornings"];
 const profileOptions = ["Public", "Private"];
 
 export default function UserProfileForm() {

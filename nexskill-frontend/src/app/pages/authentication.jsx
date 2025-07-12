@@ -1,4 +1,3 @@
-"use client"
 import React from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -13,9 +12,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-// import Footer from "../components/Footer";
-// import Navbar from "../components/Navbar";
-// import { AuthContext } from "../contexts/AuthContext";
+import { AuthContext } from "@/contexts/AuthContext";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
@@ -31,12 +28,36 @@ export default function authentication() {
   const [message, setMessage] = React.useState("");
 
   const [formState, setFormState] = React.useState("login");
-  // const { handleRegister, handleLogin, handleGoogleLogin } = React.useContext(AuthContext);
+  const { handleRegister, handleLogin, handleGoogleLogin } = React.useContext(AuthContext);
   const navigation = useNavigate();
+
+  let handleAuth = async () => {
+    try {
+      if (formState === "login") {
+        let result = await handleLogin(username, password);
+        navigation("/"); 
+      }
+
+      if (formState === "signup") {
+        let result = await handleRegister(name, username, password);
+        showSuccessToast("Signup successful! You can now Login.");
+        setName("");
+        setUsername("");
+        setPassword("");
+        setFormState("login");
+      }
+
+      setError(""); 
+    } catch (err) {
+      let message = err?.response?.data?.message || "Something went wrong";
+      showErrorToast(message);
+      setError(message);
+    }
+  };
 
   return (
     <>
-    <Navbar/>
+      <Navbar />
       <motion.div
         className="flex flex-col items-center justify-center my-10 transition-all"
         initial={{ opacity: 0 }}
@@ -85,7 +106,7 @@ export default function authentication() {
                     <Button
                       variant="outline"
                       className="w-full mt-4 mb-5"
-                      // onClick={handleGoogleLogin}
+                      onClick={handleGoogleLogin}
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -214,7 +235,7 @@ export default function authentication() {
                     <Button
                       type="button"
                       className="w-full"
-                      // onClick={handleAuth}
+                      onClick={handleAuth}
                     >
                       Login
                     </Button>
@@ -271,7 +292,7 @@ export default function authentication() {
                     <Button
                       type="button"
                       className="w-full"
-                      // onClick={handleAuth}
+                      onClick={handleAuth}
                     >
                       SignUp
                     </Button>
@@ -282,7 +303,7 @@ export default function authentication() {
           </TabsContent>
         </Tabs>
       </motion.div>
-      <Footer/>
+      <Footer />
     </>
   );
 }

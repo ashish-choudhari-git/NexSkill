@@ -1,6 +1,8 @@
 'use client';
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import Footer from "@/components/Footer";
+import Navbar from "@/components/Navbar";
 
 // 🟢 Mock props (Replace with actual data in production)
 const loggedInUserSkills = ["Web Design", "UI/UX", "React"]; // Your skills
@@ -23,6 +25,8 @@ export default function SkillSwapRequest() {
   };
 
   return (
+    <>
+    <Navbar/>
     <main className="min-h-screen flex items-center justify-center bg-gray-50 px-4 py-12">
       <motion.div
         initial={{ opacity: 0, y: 40 }}
@@ -103,5 +107,7 @@ export default function SkillSwapRequest() {
         </form>
       </motion.div>
     </main>
+    <Footer/>
+    </>
   );
 }

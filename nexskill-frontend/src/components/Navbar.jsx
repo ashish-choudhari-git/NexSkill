@@ -36,7 +36,7 @@ export default function Navbar() {
               <>
                 <button
                   onClick={() => {
-                    navigation("/swaprequest");
+                    navigation("/skillswaprequest");
                   }}
                   className="hover:text-blue-700 transition-colors duration-200  border-2 rounded-md border-gray-400 px-2 py-2 me-1"
                 >
@@ -51,7 +51,7 @@ export default function Navbar() {
                   Login
                 </button>
                 <button
-                  onClick={() => navigation("/profile")}
+                  onClick={() => navigation("/userprofile")}
                   className="rounded-md px-2 py-2 bg-black text-white hover:bg-gray-800 transition-colors"
                 >
                   Profile

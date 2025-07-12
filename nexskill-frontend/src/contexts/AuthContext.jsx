@@ -2,15 +2,15 @@ import axios from "axios";
 import httpStatus from "http-status";
 import { createContext, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import server from "../environment";
+import server from "@/environment";
 import { signInWithPopup } from "firebase/auth";
 import { auth, googleProvider } from "../firebase"; // adjust path
-import { showSuccessToast, showErrorToast } from "../utils/toastHelpers";
+// import { showSuccessToast, showErrorToast } from "../utils/toastHelpers";
 
 export const AuthContext = createContext({});
 
 const client = axios.create({
-  // baseURL: "http://localhost:8000/api/v1/users",
+  // baseURL: "http://localhost:4000/api/v1/users",
   baseURL: `${server}/api/v1/users`,
 });
 

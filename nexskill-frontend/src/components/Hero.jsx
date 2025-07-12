@@ -24,17 +24,17 @@ export default function Hero() {
       </p>
       <div className="flex gap-4 flex-wrap">
         <button
-          onClick={() => navigation("/register")}
+          onClick={() => navigation("/login")}
           className="rounded-md px-6 py-3 bg-black text-white hover:bg-gray-800 transition-colors"
         >
-          List Your Skill
+          Swap Skill
         </button>
-        <button
-          onClick={() => navigation("/explore")}
+        {/* <button
+          onClick={() => navigation("/swaprequest")}
           className="rounded-md px-6 py-3 border border-black text-black hover:bg-black hover:text-white transition-colors"
         >
-          Find a Skill
-        </button>
+          Explore 
+        </button> */}
       </div>
     </motion.div>
 

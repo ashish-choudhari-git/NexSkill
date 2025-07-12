@@ -1,6 +1,6 @@
 let IS_PROD = true;
 const server = IS_PROD
-  ? "https://apnavideobackend-ldr9.onrender.com"
-  : "http://localhost:8000";
+  ? "https://nexskill.onrender.com"
+  : "http://localhost:4000";
 
 export default server;
