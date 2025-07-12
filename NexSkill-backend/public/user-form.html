@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Add User</title>
+  <style>
+    body { font-family: Arial; margin: 40px; }
+    form { max-width: 400px; margin: auto; }
+    label { display: block; margin-top: 10px; }
+    input, select { width: 100%; padding: 8px; margin-top: 4px; }
+    button { margin-top: 16px; padding: 10px 20px; }
+    .success { color: green; }
+    .error { color: red; }
+  </style>
+</head>
+<body>
+  <h2>Add User to Database</h2>
+  <form id="userForm">
+    <label>Name: <input type="text" name="name" required /></label>
+    <label>Email: <input type="email" name="email" required /></label>
+    <label>Password: <input type="password" name="password" required /></label>
+    <label>Location: <input type="text" name="location" /></label>
+    <label>Profile Photo URL: <input type="text" name="profile_photo" /></label>
+    <label>Availability:
+      <select name="availability">
+        <option value="weekends">Weekends</option>
+        <option value="evenings">Evenings</option>
+        <option value="weekdays">Weekdays</option>
+      </select>
+    </label>
+    <label>Profile Type:
+      <select name="profile_type">
+        <option value="public">Public</option>
+        <option value="private">Private</option>
+      </select>
+    </label>
+    <button type="submit">Add User</button>
+  </form>
+  <div id="result"></div>
+  <script>
+    document.getElementById('userForm').onsubmit = async function(e) {
+      e.preventDefault();
+      const form = e.target;
+      const data = {
+        name: form.name.value,
+        email: form.email.value,
+        password: form.password.value,
+        location: form.location.value,
+        profile_photo: form.profile_photo.value,
+        availability: form.availability.value,
+        profile_type: form.profile_type.value
+      };
+      const res = await fetch('/api/users/add', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      const resultDiv = document.getElementById('result');
+      if (res.ok) {
+        const json = await res.json();
+        resultDiv.innerHTML = '<div class="success">' + json.message + ' (User ID: ' + json.userId + ')</div>';
+        form.reset();
+      } else {
+        const err = await res.json();
+        resultDiv.innerHTML = '<div class="error">' + (err.error || 'Error') + '</div>';
+      }
+    };
+  </script>
+</body>
+</html>
