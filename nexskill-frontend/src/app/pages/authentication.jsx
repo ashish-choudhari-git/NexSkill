@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -31,29 +33,31 @@ export default function authentication() {
   const { handleRegister, handleLogin, handleGoogleLogin } = React.useContext(AuthContext);
   const navigation = useNavigate();
 
-  let handleAuth = async () => {
-    try {
-      if (formState === "login") {
-        let result = await handleLogin(username, password);
-        navigation("/"); 
+ let handleAuth = async () => {
+  try {
+    if (formState === "login") {
+      const result = await handleLogin(username, password);
+      if (result) {
+        navigation("/"); // ✅ Redirect only if login is successful
       }
-
-      if (formState === "signup") {
-        let result = await handleRegister(name, username, password);
-        showSuccessToast("Signup successful! You can now Login.");
-        setName("");
-        setUsername("");
-        setPassword("");
-        setFormState("login");
-      }
-
-      setError(""); 
-    } catch (err) {
-      let message = err?.response?.data?.message || "Something went wrong";
-      showErrorToast(message);
-      setError(message);
     }
-  };
+
+    if (formState === "signup") {
+      const result = await handleRegister(name, username, password);
+      setName("");
+      setUsername("");
+      setPassword("");
+      setFormState("login");
+    }
+
+    setError("");
+  } catch (err) {
+    const message = err?.response?.data?.message || "Something went wrong";
+    setError(message);
+  }
+};
+
+
 
   return (
     <>

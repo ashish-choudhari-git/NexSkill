@@ -113,7 +113,7 @@ export default function Navbar() {
           {isLoggedIn && (
             <>
               {/* User Icon */}
-              <NavUser styles={{ display: "none" }} />
+              {/* <NavUser styles={{ display: "none" }} /> */}
             </>
           )}
         </div>

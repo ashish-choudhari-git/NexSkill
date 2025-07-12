@@ -10,18 +10,25 @@ import { auth, googleProvider } from "../firebase"; // adjust path
 export const AuthContext = createContext({});
 
 const client = axios.create({
-  // baseURL: "http://localhost:4000/api/v1/users",
-  baseURL: `${server}/api/v1/users`,
+  baseURL: `${server}/api/auth`,
 });
+
 
 export const AuthProvider = ({ children }) => {
   const authContext = useContext(AuthContext);
 
   // const [userData, setUserData] = useState(authContext);
-  const [userData, setUserData] = useState(() => {
+ const [userData, setUserData] = useState(() => {
+  try {
     const savedUser = localStorage.getItem("user");
-    return savedUser ? JSON.parse(savedUser) : null;
-  });
+    if (!savedUser || savedUser === "undefined") return null;
+    return JSON.parse(savedUser);
+  } catch (e) {
+    console.error("Failed to parse saved user:", e);
+    return null;
+  }
+});
+
 
   const router = useNavigate();
 
