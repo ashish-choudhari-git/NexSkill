@@ -18,6 +18,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 // import { AuthContext } from "../contexts/AuthContext";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 // import { showSuccessToast, showErrorToast } from "../utils/toastHelpers";
 
 export default function authentication() {
@@ -34,6 +36,7 @@ export default function authentication() {
 
   return (
     <>
+    <Navbar/>
       <motion.div
         className="flex flex-col items-center justify-center my-10 transition-all"
         initial={{ opacity: 0 }}
@@ -279,6 +282,7 @@ export default function authentication() {
           </TabsContent>
         </Tabs>
       </motion.div>
+      <Footer/>
     </>
   );
 }

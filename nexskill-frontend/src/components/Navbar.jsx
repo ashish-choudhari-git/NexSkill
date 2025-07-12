@@ -1,11 +1,10 @@
 import React, { useState, useContext, useEffect } from "react";
-import { AuthContext } from "../contexts/AuthContext";
-import NavUser from "./NavUser";
-import { Video } from "lucide-react";
+// import { AuthContext } from "../contexts/AuthContext";
+// import NavUser from "./NavUser";
 import { useNavigate } from "react-router-dom";
 
 export default function Navbar() {
-  const { handleLogout } = useContext(AuthContext);
+  // const { handleLogout } = useContext(AuthContext);
   const navigation = useNavigate();
 
   const [isLoggedIn, setIsLoggedIn] = useState(
@@ -27,10 +26,7 @@ export default function Navbar() {
           }}
           className="text-3xl font-extrabold flex items-center"
         >
-          Apna
-          <span className="text-3xl font-extrabold bg-gradient-to-r from-gray-400 to-black text-transparent bg-clip-text ml-1">
-            Video
-          </span>
+          NexSkill
         </button>
 
         {/* ********** Desktop NavLinks ********** */}
@@ -40,12 +36,11 @@ export default function Navbar() {
               <>
                 <button
                   onClick={() => {
-                    navigation("/join/joinasguest");
+                    navigation("/swaprequest");
                   }}
-                  className="hover:text-blue-700 transition-colors duration-200  border-2 rounded-md border-gray-400 p-2 navLink flex gap-1"
+                  className="hover:text-blue-700 transition-colors duration-200  border-2 rounded-md border-gray-400 px-2 py-2 me-1"
                 >
-                  <Video />
-                  Join as guest
+                  Swap request
                 </button>
                 <button
                   onClick={() => {
@@ -55,20 +50,38 @@ export default function Navbar() {
                 >
                   Login
                 </button>
+                <button
+                  onClick={() => navigation("/profile")}
+                  className="rounded-md px-2 py-2 bg-black text-white hover:bg-gray-800 transition-colors"
+                >
+                  Profile
+                </button>
               </>
             )}
             {isLoggedIn && (
               <>
                 <button
                   onClick={() => {
-                    navigation("/home");
+                    navigation("/swaprequest");
+                  }}
+                  className="hover:text-blue-700 transition-colors duration-200  border-2 rounded-md border-gray-400 px-2 py-2 me-1"
+                >
+                  Swap request
+                </button>
+                <button
+                  onClick={() => {
+                    navigation("/");
                   }}
                   className="hover:text-blue-700 transition-colors duration-200  border-2 rounded-md border-gray-300 p-2 navLink flex gap-3"
                 >
-                  <Video />
-                  New call
+                  Home
                 </button>
-                <NavUser />
+                <button
+                  onClick={() => navigation("/profile")}
+                  className="rounded-md px-2 py-2 bg-black text-white hover:bg-gray-800 transition-colors"
+                >
+                  Profile
+                </button>
               </>
             )}
           </>
@@ -80,12 +93,11 @@ export default function Navbar() {
             <>
               <button
                 onClick={() => {
-                  navigation("/join/joinasguest");
+                  navigation("/swaprequest");
                 }}
                 className="hover:text-blue-700 transition-colors duration-200  border-2 rounded-md border-gray-400 px-2 py-2 me-1"
               >
-                {/* <Video /> */}
-                Join as guest
+                Swap request
               </button>
               <button
                 onClick={() => {
